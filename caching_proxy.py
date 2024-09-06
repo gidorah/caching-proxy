@@ -58,7 +58,6 @@ def handle_client(client_socket):
     if cached_content:
         print("Cache hit. Serving from cache.")
         response = f"HTTP/1.0 200 OK\r\nX-Cache: HIT\r\nContent-Length: {len(cached_content)}\r\n\r\n{cached_content}"
-        client_socket.sendall(response.encode())
     else:
         print("Cache miss. Fetching from server.")
 
@@ -71,7 +70,7 @@ def handle_client(client_socket):
         except HTTPError as e:
             response = f"HTTP/1.0 {e.status} FAIL\r\nContent-Length: {len(e.msg)}\r\n\r\n{e.msg}"
 
-        client_socket.sendall(response.encode())
+    client_socket.sendall(response.encode())
     client_socket.close()
 
 
