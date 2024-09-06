@@ -40,9 +40,10 @@ def save_to_cache(url, content):
 
 
 def parse_url_from_request(request):
-    request_parts = request.split("\r\n")
-    if not request_parts:
+    if not request:
         return None
+
+    request_parts = request.split("\r\n")
 
     url = request_parts[0].split(" ")[1]
     url = args.origin + url
