@@ -1,5 +1,4 @@
 import socket
-import threading
 import os
 from urllib.request import urlopen
 from urllib.error import HTTPError
@@ -84,8 +83,7 @@ def start_proxy_server(host, port):
     while True:
         client_socket, addr = server.accept()
         print(f"Accepted connection from {addr}")
-        client_handler = threading.Thread(target=handle_client, args=(client_socket,))
-        client_handler.start()
+        handle_client(client_socket)
 
 
 if __name__ == "__main__":
